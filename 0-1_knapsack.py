@@ -17,7 +17,7 @@ def bottomup(weights, values, limit):
         # TODO feature addition for later, not needed for MVS
         #   Resolution (num): divisions of weight, 1, 0.1, 0.01, etc. to specify precision of solution
     Output:
-        returns mixed tuple (value(num), item list[1, 3, ...])
+        returns the maximal stored value (num)
         '''
     
     # Sanitize and prepare inputs for operations:
@@ -66,5 +66,5 @@ def topdown(weights, values, limit):
         # TODO feature addition for later, not needed for MVS
         #   Resolution (num): divisions of weight, 1, 0.1, 0.01, etc. to specify precision of solution
     Output:
-        returns mixed tuple (value(num), item list[1, 3, ...])
+        returns the maximal stored value (num)
         '''
