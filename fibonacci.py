@@ -26,7 +26,7 @@ def fastfibtopdown(n, memo = {0:0, 1:1}):
 def fastfibbottomup(n):
     '''
     bottom up iterative dynamic programming solution - working.
-    Solution is too large for memory so will crash my 16GB MacBookPro, but it will solve it in reasonable time up to about 1000000th fibnum.
+    Solution to 1000000th fnum is too large for memory so will crash my 16GB MacBookPro, but it will solve it in reasonable time.
     Each iteration only stores three variables. 
     '''
     if n == 0 or n == 1:
