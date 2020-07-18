@@ -22,8 +22,7 @@ def minchange_rec(AC, TV): #working as intended
                 result = tmp
             
     return result
-        
 
 AC=(100, 50, 25, 10, 5, 1)  #available coin denominations
-TV = 21  #target value should be 4
+TV = 21  #result of TV = 21 should be 4
 print("\noverall function return: ", minchange_rec(AC, TV))
