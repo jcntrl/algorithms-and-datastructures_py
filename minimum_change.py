@@ -13,7 +13,7 @@ def minchange_TD(AC, TV, res=0):
                 minchange_TD(AC, TV, res)
     print('out of loop res', res)
     return res
-        
+        # 
 
 AC=(100, 50, 25, 10, 5, 1)  #available coin denominations
 TV = 4  #target value
