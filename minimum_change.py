@@ -1,3 +1,4 @@
+import time
 
 
 def minchange_rec(AC, TV): #working as intended
@@ -57,7 +58,6 @@ def minchange_TD(AC, TV, memo={}):
     return result
 
 
-import time
 def timetest(available, target, func):
 	t0=time.time()
 	x = func(available, target)
@@ -68,7 +68,7 @@ def timetest(available, target, func):
 
 
 AC=(100, 50, 25, 10, 5, 1)  #available coin denominations
-TV = 54
+TV = 49
 # print("\noverall function return: ", minchange_TD(AC, TV))
 
 timetest(AC, TV, minchange_rec)
