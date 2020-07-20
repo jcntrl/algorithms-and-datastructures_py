@@ -1,7 +1,11 @@
+import time
+
+
 def minchange_rec(AC, TV): #working as intended
     """
     # Determines minimum number of coins to make TargetValue from AvailableCoins
     ## Non-optimized recursive solution. THIS WILL BE SLOW.
+    ## ~8s to converge on solution for TV = 54. TV > 54... too slow to be patient for.
     Input: (int) list of AvailableCoins \n
     ### Note: 1 is always included in AvailableCoins
     Input: (int) TargetValue \n
@@ -23,35 +27,51 @@ def minchange_rec(AC, TV): #working as intended
             
     return result
 
-def test(algo, tests, expected):
+def minchange_TD(AC, TV, memo={}):
     """
-    input/select which algo to test: recursive, topdown, bottomup
-    input a list of integers to test, input a list of expected results
-    returns nothing, prints results of test to console
+    # Determines minimum number of coins to make TargetValue from AvailableCoins
+    ## Top-down dynamic programming recursive solution. THIS WILL BE FASTER THAN SLOW.
+    ## Much faster than non-optimized recursive; ~7ms to converge on solution for TV=54.
+    Input: (int) list of AvailableCoins \n
+    ### Note: 1 is always included in AvailableCoins
+    Input: (int) TargetValue \n
+    Output: (int) minimum number of coins to solve \n
     """
-    # add a selector? how?
 
-    for i in range(len(tests)):
-        try:
-            test = minchange_rec(AC, tests[i])
-            assert test == expected[i]
-            print('PASS', tests[i], '==>', test, 'should be:', expected[i])
-        except:
-            print('FAIL', tests[i], '==>', test, 'should be:', expected[i])
+    result = TV #worst case scenario, provides upper bound to improve against
+    if TV == 0: #basecase, when TV==0, stop this recursion
+        return 0
+
+    # now iterate over list of coins, qualify coin, 
+    #  return if solution in memo, else recurse to generate depth solution and store in memo
+    #       and compare to incumbent result and accept if better
+    for coin in AC:
+        if coin <= TV:
+            if TV in memo:
+                return memo[TV]
+            else:
+                tmp = 1 + minchange_TD(AC, TV-coin) #take current coin and recurse
+            if tmp < result:
+                result = tmp
+                memo[TV] = tmp
+            
+    return result
 
 
-
-
-# test(
-#     [0, 1, 4, 5, 6, 9, 10, 11, 14, 15, 16, 19, 20, 21, 24, 25, 26, 29, 30, 31, 49, 50, 51, 99, 100, 101],
-#     [0, 1, 4, 1, 2, 5, 1,  2,  5,  2,  3,  6,  2,  3,  6,  1,  2,  5,  2,  3,  7,  1,  2,  8,  1,   2]
-# )
+def timetest(available, target, func):
+	t0=time.time()
+	x = func(available, target)
+	tf=time.time()
+	print(func, x, tf-t0)
 
 
 
 
 AC=(100, 50, 25, 10, 5, 1)  #available coin denominations
-TV = 21  #result of TV = 21 should be 4
-print("\noverall function return: ", minchange_rec(AC, TV))
+TV = 49
+# print("\noverall function return: ", minchange_TD(AC, TV))
+
+timetest(AC, TV, minchange_rec)
+timetest(AC, TV, minchange_TD)
 
 
