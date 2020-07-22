@@ -57,6 +57,19 @@ def minchange_TD(AC, TV, memo={}):
             
     return result
 
+def minchange_BU(AC, TV):
+    """
+    # Determines minimum number of coins to make TargetValue from AvailableCoins
+    ## Bottum-up dynamic programming iterative solution. THIS WILL BE FASTER THAN SLOW.
+    ## Much faster than non-optimized recursive; ~TODO ms to converge on solution for TV=54.
+    Input: (int) list of AvailableCoins \n
+    ### Note: 1 is always included in AvailableCoins
+    Input: (int) TargetValue \n
+    Output: (int) minimum number of coins to solve \n
+    """
+
+    SVT = [ [ -1 for value in range(TV+1)] for coin in AC]
+    print(SVT)
 
 def timetest(available, target, func):
 	t0=time.time()
@@ -71,7 +84,7 @@ AC=(100, 50, 25, 10, 5, 1)  #available coin denominations
 TV = 49
 # print("\noverall function return: ", minchange_TD(AC, TV))
 
-timetest(AC, TV, minchange_rec)
-timetest(AC, TV, minchange_TD)
+# timetest(AC, TV, minchange_rec)
+# timetest(AC, TV, minchange_TD)
 
-
+minchange_BU(AC=[0, 1, 5, 10], TV=2)
