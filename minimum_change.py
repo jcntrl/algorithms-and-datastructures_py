@@ -67,9 +67,24 @@ def minchange_BU(AC, TV):
     Input: (int) TargetValue \n
     Output: (int) minimum number of coins to solve \n
     """
-
+    # build and initialize solution value table:
     SVT = [ [ -1 for value in range(TV+1)] for coin in AC]
-    print(SVT)
+    # SVT = [['0-0', '0-1', '0-2'],['1-0,', '1-1', '1-2'], ['5-0', '5-1', '5-2'], ['10-0', '10-1', '10-2']]
+    
+    # implement iterative algorithm:
+    for coinindex in range(len(AC)):
+        for value in range(TV+1):
+            # print(SVT[coinindex][value])
+            if AC[coinindex] == 0 or value == 0:
+                SVT[coinindex][value] = 0
+            # else:
+            #     NV = TV // AC[coinindex]
+            #     RM = TV % AC[coinindex]
+            #     SVT[coinindex][value] = NV + SVT[coinindex][RM]
+            # # print(SVT[coinindex][value])
+
+
+
 
 def timetest(available, target, func):
 	t0=time.time()
@@ -87,4 +102,4 @@ TV = 49
 # timetest(AC, TV, minchange_rec)
 # timetest(AC, TV, minchange_TD)
 
-minchange_BU(AC=[0, 1, 5, 10], TV=2)
+minchange_BU(AC=[0, 1, 5, 10], TV=1)
