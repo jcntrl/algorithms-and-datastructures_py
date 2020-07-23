@@ -84,13 +84,13 @@ def minchange_BU(AC, TV):
             if coin == 0 or value == 0:
                 SVT[coinindex][value] = 0
             else:
-                NV, RM = value // coin, value % coin
+                NV, RM = value // coin, value % coin #NV = NewValue, RM = Remainder
                 if NV == 0:
-                    SVT[coinindex][value] = SVT[coinindex-1][value] #look back previous coin
+                    SVT[coinindex][value] = SVT[coinindex-1][value] #can't take this coin, use previous coin solution
                 elif RM == 0:
-                    SVT[coinindex][value] = NV
+                    SVT[coinindex][value] = NV #perfect fit, take it
                 else:
-                    SVT[coinindex][value] = NV + SVT[coinindex][RM] #look back same coin
+                    SVT[coinindex][value] = NV + SVT[coinindex][RM] #take this coin(s) and supplement from same coin remainder's solution
     return SVT[-1][-1]
 
 
