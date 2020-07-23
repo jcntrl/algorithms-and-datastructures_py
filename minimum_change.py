@@ -85,14 +85,12 @@ def minchange_BU(AC, TV):
                 SVT[coinindex][value] = 0
             else:
                 NV, RM = value // coin, value % coin
-                lookbackinsamecoin = SVT[coinindex][RM]
-                lookbackprevcoin = SVT[coinindex-1][value]
                 if NV == 0:
-                    SVT[coinindex][value] = lookbackprevcoin
+                    SVT[coinindex][value] = SVT[coinindex-1][value] #look back previous coin
                 elif RM == 0:
                     SVT[coinindex][value] = NV
                 else:
-                    SVT[coinindex][value] = NV + lookbackinsamecoin
+                    SVT[coinindex][value] = NV + SVT[coinindex][RM] #look back same coin
     return SVT[-1][-1]
 
 
