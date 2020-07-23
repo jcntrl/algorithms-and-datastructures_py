@@ -60,28 +60,41 @@ def minchange_TD(AC, TV, memo={}):
 def minchange_BU(AC, TV):
     """
     # Determines minimum number of coins to make TargetValue from AvailableCoins
-    ## Bottum-up dynamic programming iterative solution. THIS WILL BE FASTER THAN SLOW.
+    ## Bottom-up dynamic programming iterative solution. THIS WILL BE FASTER THAN SLOW.
     ## Much faster than non-optimized recursive; ~TODO ms to converge on solution for TV=54.
     Input: (int) list of AvailableCoins \n
     ### Note: 1 is always included in AvailableCoins
     Input: (int) TargetValue \n
     Output: (int) minimum number of coins to solve \n
     """
+    # sanitize and prepare inputs:
+    # 1 must be included in AC
+    if 1 not in AC: 
+        AC[-1] = 1
+    # algorithm requires sorted list input. Adds linear time overhead O(n) at worst
+    AC.sort()
+
     # build and initialize solution value table:
-    SVT = [ [ -1 for value in range(TV+1)] for coin in AC]
-    # SVT = [['0-0', '0-1', '0-2'],['1-0,', '1-1', '1-2'], ['5-0', '5-1', '5-2'], ['10-0', '10-1', '10-2']]
+    SVT = [ [ -1 for value in range(TV + 1)] for coin in AC]
     
     # implement iterative algorithm:
     for coinindex in range(len(AC)):
         for value in range(TV+1):
-            # print(SVT[coinindex][value])
-            if AC[coinindex] == 0 or value == 0:
+            coin = AC[coinindex]
+            if coin == 0 or value == 0:
                 SVT[coinindex][value] = 0
-            # else:
-            #     NV = TV // AC[coinindex]
-            #     RM = TV % AC[coinindex]
-            #     SVT[coinindex][value] = NV + SVT[coinindex][RM]
-            # # print(SVT[coinindex][value])
+            else:
+                NV, RM = value // coin, value % coin
+                lookbackinsamecoin = SVT[coinindex][RM]
+                lookbackprevcoin = SVT[coinindex-1][value]
+                if NV == 0:
+                    SVT[coinindex][value] = lookbackprevcoin
+                elif RM == 0:
+                    SVT[coinindex][value] = NV
+                else:
+                    SVT[coinindex][value] = NV + lookbackinsamecoin
+    return SVT[-1][-1]
+
 
 
 
@@ -102,4 +115,4 @@ TV = 49
 # timetest(AC, TV, minchange_rec)
 # timetest(AC, TV, minchange_TD)
 
-minchange_BU(AC=[0, 1, 5, 10], TV=1)
+print(minchange_BU(AC=[10, 5, 2, 1], TV=26))
