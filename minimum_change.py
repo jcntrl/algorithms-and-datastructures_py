@@ -72,7 +72,7 @@ def minchange_BU(AC, TV):
     if 1 not in AC: 
         AC[-1] = 1
     # algorithm requires sorted list input. Adds linear time overhead O(n) at worst
-    AC = sorted(AC)
+    AC.sort()
 
     # build and initialize solution value table:
     SVT = [ [ -1 for value in range(TV + 1)] for coin in AC]
