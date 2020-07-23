@@ -85,12 +85,12 @@ def minchange_BU(AC, TV):
                 SVT[coinindex][value] = 0
             else:
                 NV, RM = value // coin, value % coin #NV = NewValue, RM = Remainder
-                if NV == 0:
-                    SVT[coinindex][value] = SVT[coinindex-1][value] #can't take this coin, use previous coin solution
-                elif RM == 0:
-                    SVT[coinindex][value] = NV #perfect fit, take it
-                else:
-                    SVT[coinindex][value] = NV + SVT[coinindex][RM] #take this coin(s) and supplement from same coin remainder's solution
+                if NV == 0: #can't take this coin, use previous coin solution
+                    SVT[coinindex][value] = SVT[coinindex-1][value] 
+                elif RM == 0: #perfect fit, take it
+                    SVT[coinindex][value] = NV 
+                else: #take this coin(s) and supplement from same coin remainder's solution
+                    SVT[coinindex][value] = NV + SVT[coinindex][RM] 
     return SVT[-1][-1]
 
 
