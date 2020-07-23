@@ -31,7 +31,7 @@ def minchange_TD(AC, TV, memo={}):
     """
     # Determines minimum number of coins to make TargetValue from AvailableCoins
     ## Top-down dynamic programming recursive solution. THIS WILL BE FASTER THAN SLOW.
-    ## Much faster than non-optimized recursive; ~7ms to converge on solution for TV=54.
+    ## Much faster than non-optimized recursive; ~7mus to converge on solution for TV=54.
     Input: (int) list of AvailableCoins \n
     ### Note: 1 is always included in AvailableCoins
     Input: (int) TargetValue \n
@@ -61,7 +61,7 @@ def minchange_BU(AC, TV):
     """
     # Determines minimum number of coins to make TargetValue from AvailableCoins
     ## Bottom-up dynamic programming iterative solution. THIS WILL BE FASTER THAN SLOW.
-    ## Much faster than non-optimized recursive; ~TODO ms to converge on solution for TV=54.
+    ## Much faster than non-optimized recursive; ~122 mus to converge on solution for TV=54.
     Input: (int) list of AvailableCoins \n
     ### Note: 1 is always included in AvailableCoins
     Input: (int) TargetValue \n
@@ -107,7 +107,7 @@ def timetest(available, target, func):
 
 
 AC=[100, 50, 25, 10, 5, 1]  #available coin denominations
-TV = 49
+TV = 54
 # print("\noverall function return: ", minchange_TD(AC, TV))
 
 timetest(AC, TV, minchange_rec)
