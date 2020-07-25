@@ -37,7 +37,8 @@ def minchange_TD(AC, TV, memo={}):
     Input: (int) TargetValue \n
     Output: (int) minimum number of coins to solve \n
     """
-
+    # algorithm requires descending sorted list input. Adds linear time overhead O(n) at worst
+    AC.sort(reverse=True)
     result = TV #worst case scenario, provides upper bound to improve against
     if TV == 0: #basecase, when TV==0, stop this recursion
         return 0
@@ -106,11 +107,11 @@ def timetest(available, target, func):
 
 
 
-AC=[100, 50, 25, 10, 5, 1]  #available coin denominations
-TV = 54
+AC=[1,5,10,20]  #available coin denominations
+TV = 99
 # print("\noverall function return: ", minchange_TD(AC, TV))
 
-timetest(AC, TV, minchange_rec)
+# timetest(AC, TV, minchange_rec)
 timetest(AC, TV, minchange_TD)
 timetest(AC, TV, minchange_BU)
 
